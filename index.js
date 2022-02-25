@@ -3,7 +3,7 @@ const {app,BrowserWindow} = require("electron");
 const createWindow = () => {
     const window = new BrowserWindow({})
 
-    window.loadFile("index.html")
+    window.loadFile("boggle.html")
 }
 
 app.whenReady().then(() => {
