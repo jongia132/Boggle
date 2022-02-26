@@ -87,8 +87,7 @@
     "yauzl": "^2.10.0"
   },
   "scripts": {
-    "test": "electron .",
-    "start": "electron ."
+    "run": "electron ."
   },
   "repository": {
     "type": "git",
