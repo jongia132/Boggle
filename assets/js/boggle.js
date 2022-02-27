@@ -18,29 +18,35 @@ const startGame = () => {
         ['H','I','M','N','U','Q'],
         ['H','L','N','N','R','Z']
     ]
-    const random_step1 = []
-    const random_step2 = []
+    const random= []
 
-    /// Randomise Letters
+    /// Randomise Letters, inject into squares
     function randomise() {
         for (let n = 0; n < 16; n++) {
-            random_step1.push(letters[n][Math.floor(Math.random() * 5 + 1)])
-            console.log(random_step1[n], 'Step 1 ')
+            random.push(letters[n][Math.floor(Math.random() * 5 + 1)])
         }
-        for (let c = 0; c < 16; c++) {
-            var rn = Math.floor(Math.random() * (15 - c) + 1)
-            random_step2.push(random_step1[rn])
-            console.table(random_step2)
-            random_step1.splice(rn)
+        shuffle()
+        //Shuffle the shuffled array lmaoo
+        function shuffle() {
+            let currentIndex = random.length, randomIndex
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [random[currentIndex], random[randomIndex]] = [random[randomIndex], random[currentIndex]];
+            }
+            console.table(random)
         }
-        //Random select from array and set as new array
+        // Inject into squares
+        for (let c = 1; c < 5; c++ ) {
+            for (let d = 1; d < 5; d++ ) {
+                document.getElementById("tr"+c).innerHTML
+            }
+        }
     }
 
     /// Timer
 
-    /// Create Array
 
-    /// Inject into squares
 
     /// Check letter count =/> 3
 
