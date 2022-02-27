@@ -1,5 +1,8 @@
 td {
   border: 3px solid;
-  background: grey;
-  padding: 5px;
+  background: #a7a7a7;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

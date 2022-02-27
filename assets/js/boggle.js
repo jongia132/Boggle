@@ -18,7 +18,7 @@ const startGame = () => {
         ['H','I','M','N','U','Q'],
         ['H','L','N','N','R','Z']
     ]
-    const random= []
+    const random = []
 
     /// Randomise Letters, inject into squares
     function randomise() {
@@ -37,16 +37,22 @@ const startGame = () => {
             console.table(random)
         }
         // Inject into squares
+        var randomIndex = 0
         for (let c = 1; c < 5; c++ ) {
-            for (let d = 1; d < 5; d++ ) {
-                document.getElementById("tr"+c).innerHTML
+            for (let d = 0; d < 4; d++ ) {
+                document.getElementById("tr"+c).getElementsByClassName("box")[d].innerHTML = random[randomIndex]
+                randomIndex = randomIndex+1
             }
         }
     }
 
     /// Timer
 
-
+    /// Letter Click
+    function inputLetter() {
+        document.getElementsByTagName("td")
+    }
+    
 
     /// Check letter count =/> 3
 
@@ -65,4 +71,7 @@ const startGame = () => {
     checkInternet()
 }
 
+const resetGame = () => {
+
+}
 startGame()
