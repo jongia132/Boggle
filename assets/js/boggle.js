@@ -21,6 +21,7 @@ const startGame = () => {
     const random = []
     const letterbox = document.getElementById("letterbox")
     
+    randomise()
     /// Randomise Letters, inject into squares
     function randomise() {
         for (let n = 0; n < 16; n++) {
@@ -46,56 +47,57 @@ const startGame = () => {
             }
         }
     }
+}
+/// Timer
 
-    /// Timer
+/// Word Processing
 
-    /// Word Processing
-
-    //  Word Queue and Query
-    $("#submit").click(function(){
-        //Check for valid length
-        var WordCount = letterbox.value.length
-        if (WordCount < 16, WordCount > 2) {
-            console.log("Requirements met!")
-            // If online
-            if (navigator.onLine = true) {
-                if (checkWord(letterbox.value) == 200) {
+//  Word Queue and Query
+$("#submit").click(function(){
+    //Check for valid length
+    var WordCount = letterbox.value.length
+    if (WordCount < 16, WordCount > 2) {
+        console.log("Requirements met!")
+        // If online
+        if (navigator.onLine = true) {
+            askAPI()
+            async function askAPI() {
+                const status = await checkWord(letterbox.value)
+                console.log("Status Code: "+status)
+                if (status == 200){
                     alert("That was a valid word!")
                 }
                 else {
                     alert("Your word failed to pass the dictionary test!")
                 }
             }
-            // If offline
-            else {
-                alert("Internet verification is unavailable")
-            }
         }
+        // If offline
         else {
-            alert("Word must be higher than 3 characters!")
+            alert("Internet verification is unavailable")
         }
-        //Dictionary API Hooker
-        async function checkWord(word) {
-            await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + word).then (response => {return response.status})
-        }
-    })
-
-    /// Check letter count =/> 3
-
-    /// Lock surrounding squares
-
-    /// Check internet Connection
-
-    const checkInternet = () => {
-        document.getElementById('onlinestatus').innerText = navigator.onLine ? 'Connected':'Disconnected'
     }
-    window.addEventListener('online', checkInternet)
-    window.addEventListener('offline', checkInternet)
-
-    /// Startup
-    randomise()
-    checkInternet()
+    else {
+        alert("Word must be higher than 3 characters!")
+    }
+})
+//Dictionary API Hooker
+async function checkWord(word) {
+    const a = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + word).then (response => {return response.status})
+    return a
 }
+
+/// Check letter count =/> 3
+
+/// Lock surrounding squares
+
+/// Check internet Connection
+
+const checkInternet = () => {
+    document.getElementById('onlinestatus').innerText = navigator.onLine ? 'Connected':'Disconnected'
+}
+window.addEventListener('online', checkInternet)
+window.addEventListener('offline', checkInternet)
 
 /// During Game
 
@@ -122,4 +124,6 @@ $("html").keydown(function(key){
 
 function resetGame() {
 }
+/// Startup
 startGame()
+checkInternet()
