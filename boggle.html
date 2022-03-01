@@ -1,36 +1,51 @@
 <!DOCTYPE html>
-<head>
-    <link href="./assets/css/style.css" rel="stylesheet">
-    <title>Boggle</title>
-</head>
-<body>
-    <table class="grid">
-        <tr id="tr1">
-            <td class="box" onlcick="inputLetter()"></td>
-            <td class="box"></td>
-            <td class="box"></td>
-            <td class="box"></td>
-        </tr>
-        <tr id="tr2">
-            <td class="box">d5</td>
-            <td class="box">d6</td>
-            <td class="box">d7</td>
-            <td class="box">d8</td>
-        </tr>
-        <tr id="tr3">
-            <td class="box">d9</td>
-            <td class="box">d10</td>
-            <td class="box">d11</td>
-            <td class="box">d12</td>
-        </tr>
-        <tr id="tr4">
-            <td class="box">d13</td>
-            <td class="box">d14</td>
-            <td class="box">d15</td>
-            <td class="box">d16</td>
-        </tr>
-    </table>
-    <input disabled="disabled"><button>Submit</button>
-    <p id="onlinestatus">Checking Internet Status...</p>
-</body>
-<script src="./assets/js/boggle.js"></script>
+<html onmousedown="return false" onselectstart="return false">
+    <head>
+        <link href="./assets/css/style.css" rel="stylesheet">
+        <title>Boggle</title>
+    </head>
+    <body>
+        <!-- Letter Grid -->
+        <table class="grid">
+            <tr id="tr1">
+                <td class="box"></td>
+                <td class="box"></td>
+                <td class="box"></td>
+                <td class="box"></td>
+            </tr>
+            <tr id="tr2">
+                <td class="box"></td>
+                <td class="box"></td>
+                <td class="box"></td>
+                <td class="box"></td>
+            </tr>
+            <tr id="tr3">
+                <td class="box"></td>
+                <td class="box"></td>
+                <td class="box"></td>
+                <td class="box"></td>
+            </tr>
+            <tr id="tr4">
+                <td class="box"></td>
+                <td class="box"></td>
+                <td class="box"></td>
+                <td class="box"></td>
+            </tr>
+        </table>
+        <button id="resetBtn" onclick="clearBox()">Clear</button><input id="letterbox" disabled="disabled"><button id="submit">Submit</button>
+        <p id="onlinestatus">Checking Internet Status...</p>
+
+        <!--Right Side-->
+        <ul class="wordlist" id="passed">
+
+        </ul>
+        <ul class="wordList" id="queryList">
+            <li id="queue">word</li>
+        </ul>
+        <ul class="wordlist" id="failed">
+
+        </ul>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="./assets/js/boggle.js" type="text/javascript"></script>
+</html>

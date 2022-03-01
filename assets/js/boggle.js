@@ -19,7 +19,8 @@ const startGame = () => {
         ['H','L','N','N','R','Z']
     ]
     const random = []
-
+    const letterbox = document.getElementById("letterbox")
+    
     /// Randomise Letters, inject into squares
     function randomise() {
         for (let n = 0; n < 16; n++) {
@@ -48,11 +49,36 @@ const startGame = () => {
 
     /// Timer
 
-    /// Letter Click
-    function inputLetter() {
-        document.getElementsByTagName("td")
-    }
-    
+    /// Word Processing
+
+    //  Word Queue and Query
+    $("#submit").click(function(){
+        //Check for valid length
+        var WordCount = letterbox.value.length
+        if (WordCount < 16, WordCount > 2) {
+            console.log("Requirements met!")
+            // If online
+            if (navigator.onLine = true) {
+                if (checkWord(letterbox.value) == 200) {
+                    alert("That was a valid word!")
+                }
+                else {
+                    alert("Your word failed to pass the dictionary test!")
+                }
+            }
+            // If offline
+            else {
+                alert("Internet verification is unavailable")
+            }
+        }
+        else {
+            alert("Word must be higher than 3 characters!")
+        }
+        //Dictionary API Hooker
+        async function checkWord(word) {
+            await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + word).then (response => {return response.status})
+        }
+    })
 
     /// Check letter count =/> 3
 
@@ -71,7 +97,29 @@ const startGame = () => {
     checkInternet()
 }
 
-const resetGame = () => {
+/// During Game
 
+//Letter Click
+$("td").click(function(){
+    console.log($(this).text())
+    var current = document.getElementById("letterbox").value
+    document.getElementById("letterbox").value = current + $(this).text()
+})
+
+//Clear Box
+function clearBox() {
+    letterbox.value = ""
+}
+
+//Backspace Remove Last Letter
+$("html").keydown(function(key){
+    if (key.which == 8) {
+        event.preventDefault()
+        current = letterbox.value
+        letterbox.value = current.slice(0, -1);
+    }
+})
+
+function resetGame() {
 }
 startGame()
