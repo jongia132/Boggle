@@ -1,7 +1,12 @@
 module.exports = {
-  content: ["./assets/.{css,js}"],
+  content: [
+    "./assets/*/*.{scss,js}",
+    "./*.html"
+  ],
   theme: {
-    extend: {},
+    fontFamily: {
+      'mono': ['Roboto Mono', 'monospace'],
+    }
   },
   plugins: [],
 }

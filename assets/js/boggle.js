@@ -1,56 +1,57 @@
-const startGame = () => {
-    /// Variables
-    const letters = [
-        ['A','A','E','E','G','N'],
-        ['A','B','B','J','O','O'],
-        ['A','C','H','O','P','S'],
-        ['A','F','F','K','P','S'],
-        ['A','O','O','T','T','W'],
-        ['C','I','M','O','T','U'],
-        ['D','E','I','L','R','X'],
-        ['D','E','L','R','V','Y'],
-        ['D','I','S','T','T','Y'],
-        ['E','E','G','H','N','W'],
-        ['E','E','I','N','S','U'],
-        ['E','H','R','T','V','W'],
-        ['E','I','O','S','S','T'],
-        ['E','L','R','T','T','Y'],
-        ['H','I','M','N','U','Q'],
-        ['H','L','N','N','R','Z']
-    ]
-    const random = []
-    const letterbox = document.getElementById("letterbox")
-    
-    randomise()
-    /// Randomise Letters, inject into squares
-    function randomise() {
-        for (let n = 0; n < 16; n++) {
-            random.push(letters[n][Math.floor(Math.random() * 5 + 1)])
+/// Variables
+const letters = [
+    ['A','A','E','E','G','N'],
+    ['A','B','B','J','O','O'],
+    ['A','C','H','O','P','S'],
+    ['A','F','F','K','P','S'],
+    ['A','O','O','T','T','W'],
+    ['C','I','M','O','T','U'],
+    ['D','E','I','L','R','X'],
+    ['D','E','L','R','V','Y'],
+    ['D','I','S','T','T','Y'],
+    ['E','E','G','H','N','W'],
+    ['E','E','I','N','S','U'],
+    ['E','H','R','T','V','W'],
+    ['E','I','O','S','S','T'],
+    ['E','L','R','T','T','Y'],
+    ['H','I','M','N','U','Q'],
+    ['H','L','N','N','R','Z']
+]
+var random = []
+const letterbox = document.getElementById("letterbox")
+
+/// Randomise Letters, inject into squares
+function randomise() {
+    random = []
+    for (let n = 0; n < 16; n++) {
+        random.push(letters[n][Math.floor(Math.random() * 5 + 1)])
+    }
+    //Shuffle the shuffled array lmaoo
+    shuffle()
+    function shuffle() {
+        let currentIndex = random.length, randomIndex
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [random[currentIndex], random[randomIndex]] = [random[randomIndex], random[currentIndex]];
         }
-        shuffle()
-        //Shuffle the shuffled array lmaoo
-        function shuffle() {
-            let currentIndex = random.length, randomIndex
-            while (currentIndex != 0) {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex--;
-                [random[currentIndex], random[randomIndex]] = [random[randomIndex], random[currentIndex]];
-            }
-            console.table(random)
-        }
-        // Inject into squares
-        var randomIndex = 0
-        for (let c = 1; c < 5; c++ ) {
-            for (let d = 0; d < 4; d++ ) {
-                document.getElementById("tr"+c).getElementsByClassName("box")[d].innerHTML = random[randomIndex]
-                randomIndex = randomIndex+1
-            }
+        console.table(random)
+    }
+    // Inject into squares
+    var randomIndex = 0
+    for (let c = 1; c < 5; c++ ) {
+        for (let d = 0; d < 4; d++ ) {
+            document.getElementById("tr"+c).getElementsByClassName("box")[d].innerHTML = random[randomIndex]
+            randomIndex = randomIndex+1
         }
     }
 }
 /// Timer
 
-/// Word Processing
+/// Word Point Processing
+function wordScore() {
+
+}
 
 //  Word Queue and Query
 $("#submit").click(function(){
@@ -58,24 +59,9 @@ $("#submit").click(function(){
     var WordCount = letterbox.value.length
     if (WordCount < 16, WordCount > 2) {
         console.log("Requirements met!")
-        // If online
-        if (navigator.onLine = true) {
-            askAPI()
-            async function askAPI() {
-                const status = await checkWord(letterbox.value)
-                console.log("Status Code: "+status)
-                if (status == 200){
-                    alert("That was a valid word!")
-                }
-                else {
-                    alert("Your word failed to pass the dictionary test!")
-                }
-            }
-        }
-        // If offline
-        else {
-            alert("Internet verification is unavailable")
-        }
+        // Add word to queue
+        askAPI(letterbox.value)
+        clearBox()
     }
     else {
         alert("Word must be higher than 3 characters!")
@@ -86,6 +72,27 @@ async function checkWord(word) {
     const a = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + word).then (response => {return response.status})
     return a
 }
+async function askAPI(word) {
+    if (navigator.onLine = true) {
+        const status = await checkWord(word)
+        console.log("Status Code: "+status)
+        if (status == 200){
+            alert("That was a valid word!")
+            return true
+        }
+        else {
+            alert("Your word failed to pass the dictionary test!")
+            return false
+        }
+    }
+    else {
+        alert("Online Functionality Not Available")
+    }
+}
+
+/// Point Counter System
+
+
 
 /// Check letter count =/> 3
 
@@ -123,7 +130,10 @@ $("html").keydown(function(key){
 })
 
 function resetGame() {
+    randomise()
+    clearBox()
 }
+
 /// Startup
-startGame()
+randomise()
 checkInternet()

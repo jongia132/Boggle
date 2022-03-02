@@ -87,7 +87,8 @@
     "yauzl": "^2.10.0"
   },
   "scripts": {
-    "run": "electron ."
+    "start": "electron .",
+    "tw": "tailwindcss build -i assets/css/style.scss -o assets/css/style.css"
   },
   "repository": {
     "type": "git",
