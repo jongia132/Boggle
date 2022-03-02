@@ -80,9 +80,15 @@ async function askAPI(word) {
             alert("That was a valid word!")
             return true
         }
-        else {
+        else if (status == 404) {
             alert("Your word failed to pass the dictionary test!")
             return false
+        }
+        else if (status == 503) {
+            alert("The dictionary API is currently experiencing issues. You will be moved into offline mode temporarily during this session.")
+        }
+        else {
+            alert("An unknown error has occured!")
         }
     }
     else {

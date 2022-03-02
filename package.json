@@ -1,7 +1,6 @@
 {
   "devDependencies": {
-    "electron": "^17.1.0",
-    "tailwindcss": "^3.0.23"
+    "electron": "^17.1.0"
   },
   "name": "sdd-task-1",
   "description": "SDD Assessment Task 1",
@@ -87,8 +86,7 @@
     "yauzl": "^2.10.0"
   },
   "scripts": {
-    "start": "electron .",
-    "tw": "tailwindcss build -i assets/css/style.scss -o assets/css/style.css"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",

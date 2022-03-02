@@ -4,9 +4,9 @@
         <link href="./assets/css/style.css" rel="stylesheet">
         <title>Boggle</title>
     </head>
-    <body class="font-mono">
+    <body>
         <!-- Letter Grid -->
-        <table class="grid rounded">
+        <table class="grid rounded font-mono">
             <tr id="tr1">
                 <td class="box"></td>
                 <td class="box"></td>
@@ -32,9 +32,13 @@
                 <td class="box"></td>
             </tr>
         </table>
-        <button id="resetBtn" onclick="clearBox()">Clear</button><input id="letterbox" disabled="disabled"><button id="submit">Submit</button>
-        <button onclick="resetGame()">Reset</button>
-        <p id="onlinestatus">Checking Internet Status...</p>
+        <div class="tools">
+            <button id="resetBtn" onclick="clearBox()">Clear</button>
+            <input id="letterbox" disabled="disabled">
+            <button id="submit">Submit</button>
+            <button onclick="resetGame()">Reset</button>
+            <p id="onlinestatus">Checking Internet Status...</p>
+        </div>
 
         <!--Right Side-->
         <ul id="wordList">
