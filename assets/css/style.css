@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap");
+table {
+  border-spacing: 10px;
+  border-collapse: separate;
+}
+
+td {
+  background: #a7a7a7;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 2em;
+}
+
+.box:hover {
+  background: white;
+}/*# sourceMappingURL=style.css.map */
