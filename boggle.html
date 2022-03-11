@@ -7,6 +7,12 @@
     <body>
         <!-- Letter Grid -->
         <table class="grid">
+            <tr id="tr0">
+                <td class="box"></td>
+                <td class="box"></td>
+                <td class="box"></td>
+                <td class="box"></td>
+            </tr>
             <tr id="tr1">
                 <td class="box"></td>
                 <td class="box"></td>
@@ -25,12 +31,6 @@
                 <td class="box"></td>
                 <td class="box"></td>
             </tr>
-            <tr id="tr4">
-                <td class="box"></td>
-                <td class="box"></td>
-                <td class="box"></td>
-                <td class="box"></td>
-            </tr>
         </table>
         <div class="tools">
             <button id="resetBtn" onclick="clearBox()">Clear</button>
@@ -41,8 +41,8 @@
         </div>
 
         <!--Right Side-->
-        <ul id="wordList">
-        </ul>
+        <output id="wordList">
+        </output>
     </body>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="./assets/js/ext.js" type="text/javascript"></script>

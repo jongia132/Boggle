@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap");
 table {
-  border-spacing: 10px;
+  border-spacing: 0px;
   border-collapse: separate;
 }
 
@@ -12,6 +12,7 @@ td {
   cursor: pointer;
   border-radius: 10px;
   font-size: 2em;
+  padding: 20px;
 }
 
 .box:hover {

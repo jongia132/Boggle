@@ -20,6 +20,7 @@ const letters = [
 var random = []
 var currentSelection = []
 const letterbox = document.getElementById("letterbox")
+var mouseDown = false
 
 /// Randomise Letters, inject into squares
 function randomise() {
@@ -40,7 +41,7 @@ function randomise() {
     }
     // Inject into squares
     var randomIndex = 0
-    for (let c = 1; c < 5; c++ ) {
+    for (let c = 0; c < 4; c++ ) {
         for (let d = 0; d < 4; d++ ) {
             document.getElementById("tr"+c).getElementsByClassName("box")[d].innerHTML = random[randomIndex]
             randomIndex = randomIndex+1
@@ -69,19 +70,40 @@ $("#submit").click(function(){
 /// During Game
 
 //Letter Hold
-$(".box").click(function(){
+$(".box").mousedown(function(){
     console.log($(this).text())
     var current = document.getElementById("letterbox").value
     document.getElementById("letterbox").value = current + $(this).text()
-    $(this).off('click')
-    //currentSelection.push(getWord)
-    for (let i = $(this).closest("tr").index(); i < 3;) {
-        for (let n = $(this).index(); n<4, n, n-1; n+2) {
-            console.log(n)
-        }
+    var row = $(this).closest("tr").index()
+    var column = $(this).index()
+    console.log(row, column)
+
+    // boxLocker Function
+    //function lockBox(x, y){
+    //    var selected = document.getElementById("tr"+ (column+1)).getElementsByClassName("box")[row + 1]
+    //    console.log(selected)
+    //}
+    //lockBox()
+})
+
+// On hold enable hover tracker
+$("td").on("mousedown", function() {
+    event.preventDefault()
+    mouseDown = true
+})
+
+$()
+
+$("td").on("mouseover", function() {
+    if (mouseDown = true) {
+        currentSelection.push($(this).text())
+        return console.log()
     }
 
 })
+
+
+
 
 //Clear Box
 function clearBox() {
