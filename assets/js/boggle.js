@@ -21,11 +21,28 @@ var random = []
 var currentSelection = []
 const letterbox = document.getElementById("letterbox")
 var mouseDown = false
+var orderCount = 0
+
+//Sounds
+function click_sound() {
+    const sound = new Audio("./assets/sounds/mixkit-plastic-bubble-click-1124.wav")
+    const newsound = sound.cloneNode()
+    newsound.play()
+}
+const success_sound = new Audio("./assets/sounds/mixkit-select-click-1109.wav")
+function error_sound() {
+    const audio = new Audio("./assets/sounds/mixkit-negative-tone-interface-tap-2569.wav")
+    const newaudio = audio.cloneNode()
+    newaudio.play()
+}
 
 class index {
     constructor (x,y) {
-        this.row = x
-        this.column = y
+        this.x = x
+        this.y = y
+    }
+    static lockBox() {
+        console.log(document.getElementById("tr"+this.y).getElementsByClassName("box")[this.x].textContent())
     }
 
     static clear() {
@@ -77,6 +94,7 @@ $("#submit").click(function(){
             text: "Stop being a dumbass!",
             icon: 'error'
         })
+        error_sound()
     }
 })
 
@@ -94,13 +112,17 @@ $("#submit").click(function(){
 // On hold enable hover tracker
 $("td").mousedown(function(e) {
     event.preventDefault()
+    $("tr>td.selected").removeClass("selected")
+    $("tr>td.start").removeClass("start")
     $(this).addClass("start")
+    currentSelection = []
     if (e.which == 1) {
         mouseDown = true
         console.log("Mousedown")
         currentSelection.push($(this).text())
         letterbox.value = $(this).text()
         $(this).addClass("selected")
+        click_sound()
     }
 })
 
@@ -108,14 +130,17 @@ $("html").mouseup(function(e) {
     if (e.which == 1) {
         mouseDown = false
         console.log("Mouseup")
+        orderCount = 0
+        $("td").removeAttr("data-order");
         if (currentSelection.length < 3) {
             letterbox.value = null
             $(this).removeClass("selected")
             currentSelection = []
         }
+        else {
+            //new index.lockBox(2,3)
+        }
     }
-    $("tr>td.selected").removeClass("selected")
-    $("tr>td.start").removeClass("start")
 })
 
 $(".box").hover (function() {
@@ -124,22 +149,34 @@ $(".box").hover (function() {
             currentSelection.push($(this).text())
             console.log($(this).text())
             $(this).addClass("selected")
+            $(this).attr("data-order", orderCount+1)
+            orderCount++
             //var row = $(this).closest("tr").index()
             //var column = $(this).index()
-            new index($(this).closest("tr").index(), $(this).index())
             //console.log(row, column)
             document.getElementById("letterbox").value = letterbox.value + $(this).text()
             console.log(currentSelection)
+            click_sound()
+        }
+        else if ($(this).attr("data-order") == orderCount - 1) {
+            currentSelection.splice(currentSelection.length, -1)
+            console.log(orderCount)
+            orderCount--
         }
     }
 })
 
-
+/////////// PLAN \\\\\\\\\\\\
+// After each hover, add an attribute with order count
+// Then if user goes backwards, check order number and splice it from array and -1 from count, remove order count attr from unselected letter
+// On mouse let go, clear all selection order attr from array
 
 
 //Clear Box
 function clearBox() {
     letterbox.value = ""
+    $("tr>td.selected").removeClass("selected")
+    $("tr>td.start").removeClass("start")
 }
 
 //Backspace Remove Last Letter
