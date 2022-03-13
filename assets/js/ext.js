@@ -9,15 +9,15 @@ async function askAPI(word) {
         const status = await checkWord(word)
         console.log("Status Code: "+status)
         if (status == 200){
-            alert("That was a valid word!")
+            Swal.fire({title:"Correct", text:"That was a valid word!", icon:"success"})
             return true
         }
         else if (status == 404) {
-            alert("Your word failed to pass the dictionary test!")
+            Swal.fire({title:"Wrong",text:"Your word failed to pass the dictionary test!", icon:"error"})
             return false
         }
         else if (status == 503) {
-            alert("The dictionary API is currently experiencing issues. You will be moved into offline mode temporarily during this session.")
+            Swal.fire({title:"Error", text:"The dictionary API is currently experiencing issues. You will be moved into offline mode temporarily during this session.", icon:"warning"})
         }
         else {
             alert("An unknown error has occured!")

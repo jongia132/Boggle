@@ -22,6 +22,17 @@ var currentSelection = []
 const letterbox = document.getElementById("letterbox")
 var mouseDown = false
 
+class index {
+    constructor (x,y) {
+        this.row = x
+        this.column = y
+    }
+
+    static clear() {
+        return random = []
+    }
+}
+
 /// Randomise Letters, inject into squares
 function randomise() {
     random = []
@@ -59,9 +70,13 @@ $("#submit").click(function(){
         // Add word to queue
         askAPI(letterbox.value)
         clearBox()
+        currentSelection = []
     }
     else {
-        alert("Word must be higher than 3 characters!")
+        Swal.fire({
+            text: "Stop being a dumbass!",
+            icon: 'error'
+        })
     }
 })
 
@@ -69,37 +84,54 @@ $("#submit").click(function(){
 
 /// During Game
 
-//Letter Hold
-$(".box").mousedown(function(){
-    console.log($(this).text())
-    var current = document.getElementById("letterbox").value
-    document.getElementById("letterbox").value = current + $(this).text()
-    var row = $(this).closest("tr").index()
-    var column = $(this).index()
-    console.log(row, column)
-
+///Letter Hold
     // boxLocker Function
     //function lockBox(x, y){
     //    var selected = document.getElementById("tr"+ (column+1)).getElementsByClassName("box")[row + 1]
     //    console.log(selected)
     //}
-    //lockBox()
-})
 
 // On hold enable hover tracker
-$("td").on("mousedown", function() {
+$("td").mousedown(function(e) {
     event.preventDefault()
-    mouseDown = true
+    $(this).addClass("start")
+    if (e.which == 1) {
+        mouseDown = true
+        console.log("Mousedown")
+        currentSelection.push($(this).text())
+        letterbox.value = $(this).text()
+        $(this).addClass("selected")
+    }
 })
 
-$()
-
-$("td").on("mouseover", function() {
-    if (mouseDown = true) {
-        currentSelection.push($(this).text())
-        return console.log()
+$("html").mouseup(function(e) {
+    if (e.which == 1) {
+        mouseDown = false
+        console.log("Mouseup")
+        if (currentSelection.length < 3) {
+            letterbox.value = null
+            $(this).removeClass("selected")
+            currentSelection = []
+        }
     }
+    $("tr>td.selected").removeClass("selected")
+    $("tr>td.start").removeClass("start")
+})
 
+$(".box").hover (function() {
+    if (mouseDown == true) {
+        if ($(this).hasClass("selected") == false) {
+            currentSelection.push($(this).text())
+            console.log($(this).text())
+            $(this).addClass("selected")
+            //var row = $(this).closest("tr").index()
+            //var column = $(this).index()
+            new index($(this).closest("tr").index(), $(this).index())
+            //console.log(row, column)
+            document.getElementById("letterbox").value = letterbox.value + $(this).text()
+            console.log(currentSelection)
+        }
+    }
 })
 
 
@@ -122,6 +154,11 @@ $("html").keydown(function(key){
 function resetGame() {
     randomise()
     clearBox()
+    /// DEBUGGING
+    ///
+    ///
+    /// ONLY
+    location.reload()
 }
 
 /// Startup
