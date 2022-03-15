@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
+html {
+    height:100%;
+    width:100%
+}
 body {
-    background:black;
-    color:rgb(58, 58, 58);
+    background:rgb(11, 13, 15);
+    color:azure;
     font-family: 'Roboto', sans-serif;
     margin:auto;
     padding:auto;
@@ -12,31 +16,36 @@ table {
     border-spacing: 1em;
     border-collapse: separate;
     margin:auto;
+    table-layout: fixed;
 }
-p {
-    color:white
-}
-td {
+.box {
     background:rgb(160, 160, 160);
+    color:rgb(58, 58, 58);
     text-align: center;
-    border-radius: 100%;
+    border-radius: 20%;
     cursor:grab;
-    font-size:5vh;
+    font-size:3em;
     transition:ease-in-out;
     transition-duration: .1s;
-    padding:5vh
-}
-.box:hover {
-    background:rgba(88, 88, 88, 0.568);
-    transition-duration: .1s;
-    color:white
+    width:100px;
+    height:100px;
+    box-sizing: border-box;
+    border-width:0px;
+    border: 0 solid;
+    &:hover {
+        background:rgba(88, 88, 88, 0.568);
+        transition-duration: .1s;
+        color:white
+    }
 }
 
 .selected {
     transition-duration: .1s;
-    transition:ease;
+    transition:ease-in-out;
     background:rgb(0, 114, 9);
-    color:white
+    color:white;
+    border:solid white;
+    border-width:4px;
 }
 
 .start {

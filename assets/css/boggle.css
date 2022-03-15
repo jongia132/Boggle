@@ -1,7 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   background: #0b0d0f;
-  color: #3a3a3a;
+  color: azure;
   font-family: "Roboto", sans-serif;
   margin: auto;
   padding: auto;
@@ -15,12 +20,9 @@ table {
   table-layout: fixed;
 }
 
-p {
-  color: white;
-}
-
-td {
+.box {
   background: #a0a0a0;
+  color: #3a3a3a;
   text-align: center;
   border-radius: 20%;
   cursor: -webkit-grab;
@@ -34,13 +36,6 @@ td {
   border-width: 0px;
   border: 0 solid;
 }
-
-.box {
-  border: 0 solid;
-  transition: ease-in-out;
-  transition-delay: 0.1s;
-}
-
 .box:hover {
   background: rgba(88, 88, 88, 0.568);
   transition-duration: 0.1s;
@@ -68,4 +63,4 @@ td {
 
 main {
   margin: 0 auto;
-}/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=boggle.css.map */

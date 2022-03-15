@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html style="cursor:default">
     <head>
-        <link href="./assets/css/style.css" rel="stylesheet">
+        <link href="./assets/css/boggle.css" rel="stylesheet">
         <title>Boggle</title>
     </head>
     <body>
         <!-- Letter Grid -->
         <main>
-            <table id="table" class="grid" style=cursor:auto>
+            <table id="grid">
                 <tr id="tr0">
                     <td class="box"></td>
                     <td class="box"></td>
@@ -43,8 +43,14 @@
         </main>
         <!--Right Side-->
         <output id="wordList">
+            <table id="queue">
+                <tr>
+                    <th>Word</th>
+                    <th>Status</th>
+                    <th>Point Count</th>
+                </tr>
+            </table>
         </output>
-        <button script="window.close()">Close Game (NOT WORKING)</button>
     </body>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

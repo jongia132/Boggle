@@ -112,9 +112,10 @@ $("#submit").click(function(){
 // On hold enable hover tracker
 $("td").mousedown(function(e) {
     event.preventDefault()
-    $("tr>td.selected").removeClass("selected")
-    $("tr>td.start").removeClass("start")
+    $(".box").removeClass("selected")
+    $(".box").removeClass("start")
     $(this).addClass("start")
+    $(this).attr("data-order", "0")
     currentSelection = []
     if (e.which == 1) {
         mouseDown = true
@@ -130,16 +131,15 @@ $("html").mouseup(function(e) {
     if (e.which == 1) {
         mouseDown = false
         console.log("Mouseup")
-        orderCount = 0
-        $("td").removeAttr("data-order");
-        if (currentSelection.length < 3) {
+        $(".box").removeAttr("data-order");
+        if (orderCount < 2) {
             letterbox.value = null
-            $(this).removeClass("selected")
+            $(".box").removeClass("selected")
+            $(".box").removeClass("start")
             currentSelection = []
+            error_sound()
         }
-        else {
-            //new index.lockBox(2,3)
-        }
+        orderCount = 0
     }
 })
 
@@ -159,34 +159,21 @@ $(".box").hover (function() {
             click_sound()
         }
         else if ($(this).attr("data-order") == orderCount - 1) {
-            currentSelection.splice(currentSelection.length, -1)
-            console.log(orderCount)
+            $("[data-order='"+ orderCount +"']").removeClass("selected")
+            currentSelection.slice(0, -1)
             orderCount--
+            console.log(orderCount)
+            letterbox.value = letterbox.value.slice(0, -1)
         }
     }
 })
 
-/////////// PLAN \\\\\\\\\\\\
-// After each hover, add an attribute with order count
-// Then if user goes backwards, check order number and splice it from array and -1 from count, remove order count attr from unselected letter
-// On mouse let go, clear all selection order attr from array
-
-
 //Clear Box
 function clearBox() {
-    letterbox.value = ""
-    $("tr>td.selected").removeClass("selected")
-    $("tr>td.start").removeClass("start")
+    letterbox.value = null
+    $(".box").removeClass("selected")
+    $(".box").removeClass("start")
 }
-
-//Backspace Remove Last Letter
-$("html").keydown(function(key){
-    if (key.which == 8) {
-        event.preventDefault()
-        current = letterbox.value
-        letterbox.value = current.slice(0, -1);
-    }
-})
 
 function resetGame() {
     randomise()
