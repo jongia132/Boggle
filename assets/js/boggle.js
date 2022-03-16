@@ -127,7 +127,7 @@ $("td").mousedown(function(e) {
     }
 })
 
-$("html").mouseup(function(e) {
+$("#grid").mouseup(function(e) {
     if (e.which == 1) {
         mouseDown = false
         console.log("Mouseup")
@@ -140,6 +140,12 @@ $("html").mouseup(function(e) {
             error_sound()
         }
         orderCount = 0
+    }
+})
+
+$("body").mouseup(function(e) {
+    if (e.which == 1) {
+        mouseDown = false
     }
 })
 
@@ -164,6 +170,7 @@ $(".box").hover (function() {
             orderCount--
             console.log(orderCount)
             letterbox.value = letterbox.value.slice(0, -1)
+            click_sound()
         }
     }
 })
