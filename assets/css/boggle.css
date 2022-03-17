@@ -11,13 +11,20 @@ body {
   margin: auto;
   padding: auto;
   text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
-table {
+#grid {
   border-spacing: 1.5em;
   border-collapse: separate;
   margin: auto;
   table-layout: fixed;
+  background: #3d4745;
+  background: linear-gradient(149deg, #3d4745 0%, #363636 48%, #191c1c 100%);
+  border-radius: 10px;
 }
 
 .box {

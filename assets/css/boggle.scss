@@ -11,12 +11,16 @@ body {
     margin:auto;
     padding:auto;
     text-align: center;
+    user-select: none
 }
-table {
+#grid {
     border-spacing: 1.5em;
     border-collapse: separate;
     margin:auto;
     table-layout: fixed;
+    background: rgb(61,71,69);
+    background: linear-gradient(149deg, rgba(61,71,69,1) 0%, rgba(54,54,54,1) 48%, rgba(25,28,28,1) 100%);
+    border-radius: 10px;
 }
 .box {
     background:rgb(160, 160, 160);
