@@ -11,9 +11,6 @@ const createWindow = () => {
 //Menubar
 Menu.setApplicationMenu()
 
-
-
-
 app.whenReady().then(() => {
     createWindow()
 })
