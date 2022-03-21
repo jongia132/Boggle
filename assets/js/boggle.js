@@ -22,6 +22,9 @@ var currentSelection = []
 const letterbox = document.getElementById("letterbox")
 var mouseDown = false
 var orderCount = 0
+var totalPoints = 0
+var pointBox = document.getElementById("currentScore")
+var cache = []
 
 //Sounds
 function click_sound() {
@@ -98,8 +101,6 @@ $("#submit").click(function(){
     }
 })
 
-/// Point Counter System
-
 /// During Game
 
 ///Letter Hold
@@ -139,13 +140,28 @@ $("#grid").mouseup(function(e) {
             currentSelection = []
             error_sound()
         }
+        else if (cache.includes(letterbox.value)) {
+            Swal.fire({timerProgressBar: true,showConfirmButton: false,toast: true,position: 'top-right',customClass: {container:"position-absolute"},timer: 1500,title:"Duplicate", text:"Word already exists!", icon:"error"})
+        }
+        else {
+            var WordCount = letterbox.value.length
+            if (WordCount < 16, WordCount > 2) {
+                console.log("Requirements met!")
+                // Add word to queue
+                cache.push(letterbox.value)
+                askAPI(letterbox.value)
+            }
+        }
+        clearBox()
         orderCount = 0
     }
 })
 
+//Cancel submit event by hovering out of grid
 $("body").mouseup(function(e) {
     if (e.which == 1) {
         mouseDown = false
+        clearBox()
     }
 })
 
@@ -180,11 +196,13 @@ function clearBox() {
     letterbox.value = null
     $(".box").removeClass("selected")
     $(".box").removeClass("start")
+    currentSelection = []
 }
 
 function resetGame() {
     randomise()
     clearBox()
+    cache = []
     /// DEBUGGING
     ///
     ///

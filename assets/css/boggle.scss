@@ -43,6 +43,10 @@ body {
     }
 }
 
+.position-absolute {
+    position:absolute
+}
+
 .selected {
     transition-duration: .1s;
     transition:ease-in-out;
