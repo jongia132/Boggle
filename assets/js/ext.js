@@ -9,12 +9,12 @@ async function askAPI(word) {
         const status = await checkWord(word)
         console.log("Status Code: "+status)
         if (status == 200){
-            Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top-right',title:"Correct", text:"That was a valid word!", icon:"success"})
+            Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top',title:"Correct", text:"That was a valid word!", icon:"success"})
             success_sound.play()
             return count(word)
         }
         else if (status == 404) {
-            Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top-right',title:"Wrong",text:"Your word failed to pass the dictionary test!", icon:"error"})
+            Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top',title:"Wrong",text:"Your word failed to pass the dictionary test!", icon:"error"})
             error_sound()
             return false
         }
@@ -40,19 +40,19 @@ async function count(word) {
             totalPoints++
             break;
         case 5:
-            totalPoints+2
+            totalPoints+=2
             //2 points
             break;
         case 6:
-            totalPoints+3
+            totalPoints+=3
             //3 points
             break;
         case 7:
-            totalPoints+4
+            totalPoints+=4
             //4 points
             break;
         default:
-            totalPoints+11
+            totalPoints+=11
             // 11 points
             break;
     }

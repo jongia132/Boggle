@@ -9,7 +9,7 @@ const createWindow = () => {
 }
 
 //Menubar
-Menu.setApplicationMenu()
+//Menu.setApplicationMenu()
 
 app.whenReady().then(() => {
     createWindow()

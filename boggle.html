@@ -7,6 +7,7 @@
     <body>
         <!-- Letter Grid -->
         <main>
+            <h2>Current Score</h2></h2><h2 id="currentScore">0</h2>
             <table id="grid">
                 <tr id="tr0">
                     <td class="box"></td>
@@ -34,24 +35,23 @@
                 </tr>
             </table>
             <div class="tools">
-                <button id="resetBtn" onclick="clearBox()">Clear</button>
                 <input id="letterbox" disabled="disabled">
-                <button id="submit">Submit</button>
                 <button onclick="resetGame()">Reset</button>
                 <p id="onlinestatus">Checking Internet Status...</p>
             </div>
+            <!--Right Side-->
+            <output id="wordList">
+                <table id="queue">
+                    <tr>
+                        <th>Word</th>
+                        <th>Status</th>
+                        <th>Point Count</th>
+                    </tr>
+                </table>
+            </output>
         </main>
-        <!--Right Side-->
-        <code id="currentScore">0</code>
-        <output id="wordList">
-            <table id="queue">
-                <tr>
-                    <th>Word</th>
-                    <th>Status</th>
-                    <th>Point Count</th>
-                </tr>
-            </table>
-        </output>
+        
+
     </body>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

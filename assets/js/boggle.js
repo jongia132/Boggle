@@ -81,26 +81,6 @@ function randomise() {
 }
 /// Timer
 
-//  Word Queue and Query
-$("#submit").click(function(){
-    //Check for valid length
-    var WordCount = letterbox.value.length
-    if (WordCount < 16, WordCount > 2) {
-        console.log("Requirements met!")
-        // Add word to queue
-        askAPI(letterbox.value)
-        clearBox()
-        currentSelection = []
-    }
-    else {
-        Swal.fire({
-            text: "Stop being a dumbass!",
-            icon: 'error'
-        })
-        error_sound()
-    }
-})
-
 /// During Game
 
 ///Letter Hold
@@ -141,7 +121,7 @@ $("#grid").mouseup(function(e) {
             error_sound()
         }
         else if (cache.includes(letterbox.value)) {
-            Swal.fire({timerProgressBar: true,showConfirmButton: false,toast: true,position: 'top-right',customClass: {container:"position-absolute"},timer: 1500,title:"Duplicate", text:"Word already exists!", icon:"error"})
+            Swal.fire({timerProgressBar: true,showConfirmButton: false,toast: true,position: 'top',timer: 1500,title:"Duplicate", icon:"error"})
         }
         else {
             var WordCount = letterbox.value.length
@@ -200,8 +180,8 @@ function clearBox() {
 }
 
 function resetGame() {
-    randomise()
-    clearBox()
+    //randomise()
+    //clearBox()
     cache = []
     /// DEBUGGING
     ///

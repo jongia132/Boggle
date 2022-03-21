@@ -1,18 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
-html {
-    height:100%;
-    width:100%
-}
 body {
-    background:rgb(11, 13, 15);
+    background:rgb(37, 40, 44);
     color:azure;
     font-family: 'Roboto', sans-serif;
     margin:auto;
     padding:auto;
     text-align: center;
-    user-select: none
+    user-select: none;
+    padding:120px 0;
 }
+
 #grid {
     border-spacing: 1.5em;
     border-collapse: separate;
@@ -23,12 +21,12 @@ body {
     border-radius: 10px;
 }
 .box {
-    background:rgb(160, 160, 160);
+    background:#E5E4E2;
     color:rgb(58, 58, 58);
     text-align: center;
-    border-radius: 20%;
+    border-radius: 50%;
     cursor:grab;
-    font-size:3em;
+    font-size:3.5em;
     transition:ease-in-out;
     transition-duration: .1s;
     width:100px;
@@ -36,15 +34,14 @@ body {
     box-sizing: border-box;
     border-width:0px;
     border: 0 solid;
+    box-shadow: inset 0 0 10px rgb(43, 43, 43);
+    filter: drop-shadow(0 1px 10px rgb(29, 29, 29));
     &:hover {
         background:rgba(88, 88, 88, 0.568);
         transition-duration: .1s;
-        color:white
+        color:white;
+        transform: translateY(-2px);
     }
-}
-
-.position-absolute {
-    position:absolute
 }
 
 .selected {
@@ -54,6 +51,7 @@ body {
     color:white;
     border:solid white;
     border-width:4px;
+    font-weight: bold;
 }
 
 .start {
@@ -62,10 +60,27 @@ body {
     font-weight: bold;
 }
 
-.grid {
-    cursor:auto
-}
-
 main {
     margin: 0 auto;
+}
+
+#letterbox {
+    margin-top: 20px;
+    width:20ch;
+    height:30px;
+    background:white;
+    border: 2px white solid;
+    border-radius: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+
+button {
+    background:dodgerblue;
+    border-radius: 10px;
+    height:max-content;
+    font-size: 30px;
+    font-family: inherit;
+    border: none;
+    color:white;
 }
