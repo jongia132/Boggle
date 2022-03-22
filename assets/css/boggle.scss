@@ -4,22 +4,19 @@ body {
     background:rgb(37, 40, 44);
     color:azure;
     font-family: 'Roboto', sans-serif;
-    margin:auto;
-    padding:auto;
     text-align: center;
-    user-select: none;
-    padding:120px 0;
 }
 
 #grid {
     border-spacing: 1.5em;
     border-collapse: separate;
-    margin:auto;
     table-layout: fixed;
     background: rgb(61,71,69);
     background: linear-gradient(149deg, rgba(61,71,69,1) 0%, rgba(54,54,54,1) 48%, rgba(25,28,28,1) 100%);
-    border-radius: 10px;
+    border-radius: 1em;
+    display:inline-block;
 }
+
 .box {
     background:#E5E4E2;
     color:rgb(58, 58, 58);
@@ -32,7 +29,6 @@ body {
     width:100px;
     height:100px;
     box-sizing: border-box;
-    border-width:0px;
     border: 0 solid;
     box-shadow: inset 0 0 10px rgb(43, 43, 43);
     filter: drop-shadow(0 1px 10px rgb(29, 29, 29));
@@ -83,4 +79,14 @@ button {
     font-family: inherit;
     border: none;
     color:white;
+}
+
+#wordList {
+    display:inline-block;
+}
+
+#queue {
+    width:100%;
+    font-size: large;
+    border: 2px solid white;
 }

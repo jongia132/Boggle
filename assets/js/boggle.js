@@ -91,7 +91,7 @@ function randomise() {
     //}
 
 // On hold enable hover tracker
-$("td").mousedown(function(e) {
+$(".box").mousedown(function(e) {
     event.preventDefault()
     $(".box").removeClass("selected")
     $(".box").removeClass("start")

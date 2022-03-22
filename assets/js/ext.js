@@ -5,17 +5,56 @@ async function checkWord(word) {
 
 //Dictionary API Hooker
 async function askAPI(word) {
+    var table = document.getElementById("queue")
+    var row = table.insertRow()
+    var appendWord = row.insertCell(0).innerHTML = word
+    var valid = row.insertCell(1)
+    var points = row.insertCell(2)
+    valid.innerHTML = "<image src='./assets/loading.gif'></image>"
+    points.innerHTML = "<image src='./assets/loading.gif'></image>"
     if (navigator.onLine = true) {
         const status = await checkWord(word)
         console.log("Status Code: "+status)
         if (status == 200){
             Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top',title:"Correct", text:"That was a valid word!", icon:"success"})
             success_sound.play()
-            return count(word)
+            valid.innerHTML = "&#9989"
+            var length = word.length
+            switch (length){
+                case 3: 
+                case 4:
+                    //1 point
+                    totalPoints++
+                    points.innerHTML = "1"
+                    break;
+                case 5:
+                    totalPoints+=2
+                    //2 points
+                    points.innerHTML = "2"
+                    break;
+                case 6:
+                    totalPoints+=3
+                    //3 points
+                    points.innerHTML = "3"
+                    break;
+                case 7:
+                    totalPoints+=4
+                    points.innerHTML = "4"
+                    //4 points
+                    break;
+                default:
+                    totalPoints+=11
+                    points.innerHTML = "11"
+                    // 11 points
+                    break;
+            }
+            pointBox.innerText = totalPoints
         }
         else if (status == 404) {
             Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top',title:"Wrong",text:"Your word failed to pass the dictionary test!", icon:"error"})
             error_sound()
+            valid.innerHTML = "&#10060"
+            points.innerHTML = "0"
             return false
         }
         else if (status == 503) {
@@ -28,35 +67,6 @@ async function askAPI(word) {
     else {
         alert("Online Functionality Not Available")
     }
-}
-
-/// Point Counter System
-async function count(word) {
-    var length = word.length
-    switch (length){
-        case 3: 
-        case 4:
-            //1 point
-            totalPoints++
-            break;
-        case 5:
-            totalPoints+=2
-            //2 points
-            break;
-        case 6:
-            totalPoints+=3
-            //3 points
-            break;
-        case 7:
-            totalPoints+=4
-            //4 points
-            break;
-        default:
-            totalPoints+=11
-            // 11 points
-            break;
-    }
-    pointBox.innerText = totalPoints
 }
 
 // Disable Selecting
