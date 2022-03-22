@@ -93,14 +93,14 @@ function randomise() {
 // On hold enable hover tracker
 $(".box").mousedown(function(e) {
     event.preventDefault()
-    $(".box").removeClass("selected")
-    $(".box").removeClass("start")
-    $(this).addClass("start")
-    $(this).attr("data-order", "0")
-    currentSelection = []
     if (e.which == 1) {
+        $(".box").removeClass("selected")
+        $(".box").removeClass("start")
+        $(this).addClass("start")
+        $(this).attr("data-order", "0")
+        currentSelection = []
         mouseDown = true
-        console.log("Mousedown")
+        //console.log("Mousedown")
         currentSelection.push($(this).text())
         letterbox.value = $(this).text()
         $(this).addClass("selected")
@@ -111,7 +111,7 @@ $(".box").mousedown(function(e) {
 $("#grid").mouseup(function(e) {
     if (e.which == 1) {
         mouseDown = false
-        console.log("Mouseup")
+        //console.log("Mouseup")
         $(".box").removeAttr("data-order");
         if (orderCount < 2) {
             letterbox.value = null
@@ -126,7 +126,7 @@ $("#grid").mouseup(function(e) {
         else {
             var WordCount = letterbox.value.length
             if (WordCount < 16, WordCount > 2) {
-                console.log("Requirements met!")
+                //console.log("Requirements met!")
                 // Add word to queue
                 cache.push(letterbox.value)
                 askAPI(letterbox.value)
@@ -138,7 +138,7 @@ $("#grid").mouseup(function(e) {
 })
 
 //Cancel submit event by hovering out of grid
-$("body").mouseup(function(e) {
+$("html").mouseup(function(e) {
     if (e.which == 1) {
         mouseDown = false
         clearBox()
@@ -149,7 +149,7 @@ $(".box").hover (function() {
     if (mouseDown == true) {
         if ($(this).hasClass("selected") == false) {
             currentSelection.push($(this).text())
-            console.log($(this).text())
+            //console.log($(this).text())
             $(this).addClass("selected")
             $(this).attr("data-order", orderCount+1)
             orderCount++
@@ -157,14 +157,14 @@ $(".box").hover (function() {
             //var column = $(this).index()
             //console.log(row, column)
             document.getElementById("letterbox").value = letterbox.value + $(this).text()
-            console.log(currentSelection)
+            //console.log(currentSelection)
             click_sound()
         }
         else if ($(this).attr("data-order") == orderCount - 1) {
             $("[data-order='"+ orderCount +"']").removeClass("selected")
             currentSelection.slice(0, -1)
             orderCount--
-            console.log(orderCount)
+            //console.log(orderCount)
             letterbox.value = letterbox.value.slice(0, -1)
             click_sound()
         }

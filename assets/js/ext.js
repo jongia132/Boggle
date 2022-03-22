@@ -5,16 +5,16 @@ async function checkWord(word) {
 
 //Dictionary API Hooker
 async function askAPI(word) {
+    console.log(word)
     var table = document.getElementById("queue")
-    var row = table.insertRow()
-    var appendWord = row.insertCell(0).innerHTML = word
+    var row = table.insertRow(1)
+    row.insertCell(0).innerHTML = word
     var valid = row.insertCell(1)
     var points = row.insertCell(2)
     valid.innerHTML = "<image src='./assets/loading.gif'></image>"
     points.innerHTML = "<image src='./assets/loading.gif'></image>"
-    if (navigator.onLine = true) {
+    if (navigator.onLine == true) {
         const status = await checkWord(word)
-        console.log("Status Code: "+status)
         if (status == 200){
             Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top',title:"Correct", text:"That was a valid word!", icon:"success"})
             success_sound.play()
@@ -64,8 +64,8 @@ async function askAPI(word) {
             alert("An unknown error has occured!")
         }
     }
-    else {
-        alert("Online Functionality Not Available")
+    else if (navigator.onLine == false) {
+        window.api.findWord(word)
     }
 }
 
