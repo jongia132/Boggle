@@ -10,6 +10,25 @@ const createWindow = () => {
         },
     })
     window.loadFile("boggle.html")
+
+
+    ipcMain.on("findWord", (event, word) => {
+        wlScan(word)
+    })
+    
+    //File Scan
+    function wlScan(word) {
+        fs.readFile("./assets/word-list.txt", function (err, data) {
+            if (err) throw err;
+            if(data.includes(word)){
+                console.log(word)
+                window.webContents.closeDevTools()
+            }
+            else {
+                console.log("NO")
+            }
+        })
+    }
 }
 
 //Menubar
@@ -17,16 +36,4 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
     createWindow()
-})
-
-ipcMain.on("word", (word) => {
-    fs.readFile("./assets/word-list.txt", function (err, data) {
-        if (err) throw err;
-        if(data.includes('word')){
-            console.log(word)
-        }
-        else {
-            console.log("NO")
-        }
-    })
 })

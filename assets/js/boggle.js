@@ -179,6 +179,10 @@ function clearBox() {
     currentSelection = []
 }
 
+function stopGame() {
+    console.log("stopping")
+}
+
 function resetGame() {
     //randomise()
     //clearBox()

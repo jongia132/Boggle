@@ -1,3 +1,5 @@
+var startTime = setInterval(timer, 1000);
+
 async function checkWord(word) {
     const a = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + word).then (response => {return response.status})
     return a
@@ -5,7 +7,7 @@ async function checkWord(word) {
 
 //Dictionary API Hooker
 async function askAPI(word) {
-    console.log(word)
+    //console.log(word)
     var table = document.getElementById("queue")
     var row = table.insertRow(1)
     row.insertCell(0).innerHTML = word
@@ -69,6 +71,16 @@ async function askAPI(word) {
     }
 }
 
+async function timer() {
+    var t = document.getElementById("timer").innerText
+    if (t < 1) {
+        clearInterval(startTime)
+        stopGame()
+    }
+    else {
+        document.getElementById("timer").innerText = t - 1
+    }
+}
 // Disable Selecting
 const disableSelect = () => {
     return false
