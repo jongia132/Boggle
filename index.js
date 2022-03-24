@@ -13,16 +13,16 @@ const createWindow = () => {
 
 
     ipcMain.on("findWord", (event, word) => {
-        wlScan(word)
+        wlScan(event, word)
     })
     
     //File Scan
-    function wlScan(word) {
+    function wlScan(event, word) {
         fs.readFile("./assets/word-list.txt", function (err, data) {
             if (err) throw err;
-            if(data.includes(word)){
+            if(data.includes(word.toLowerCase())){
                 console.log(word)
-                window.webContents.closeDevTools()
+                event.sender.send('wordcheck', true)
             }
             else {
                 console.log("NO")

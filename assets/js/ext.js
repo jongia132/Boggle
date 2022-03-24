@@ -66,10 +66,15 @@ async function askAPI(word) {
             alert("An unknown error has occured!")
         }
     }
-    else if (navigator.onLine == false) {
+    else {
         window.api.findWord(word)
     }
 }
+
+
+window.api.findword('wordcheck', (args) =>{
+    console.log(args)
+})
 
 async function timer() {
     var t = document.getElementById("timer").innerText
