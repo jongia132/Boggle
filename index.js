@@ -12,23 +12,20 @@ const createWindow = () => {
     window.loadFile("boggle.html")
 
 
-    ipcMain.on("findWord", (event, word) => {
-        wlScan(event, word)
-    })
-    
-    //File Scan
-    function wlScan(event, word) {
+    ipcMain.handle("findWord", async (event, word) => {
         fs.readFile("./assets/word-list.txt", function (err, data) {
-            if (err) throw err;
-            if(data.includes(word.toLowerCase())){
-                console.log(word)
-                event.sender.send('wordcheck', true)
+            if (err)
+                throw err;
+            if (data.includes(word.toLowerCase())) {
+                console.log('true');
+                return true;
             }
             else {
-                console.log("NO")
+                console.log('false');
+                return false;
             }
         })
-    }
+    })
 }
 
 //Menubar

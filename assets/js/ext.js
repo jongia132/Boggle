@@ -67,7 +67,13 @@ async function askAPI(word) {
         }
     }
     else {
-        window.api.findWord(word)
+        const offlineQuery = await window.api.findWord(word)
+        if (offlineQuery == true) {
+            console.log(offlineQuery)
+        }
+        else {
+            console.log(offlineQuery)
+        }
     }
 }
 
