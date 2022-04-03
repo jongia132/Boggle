@@ -129,7 +129,7 @@ $("#grid").mouseup(function(e) {
                 //console.log("Requirements met!")
                 // Add word to queue
                 cache.push(letterbox.value)
-                askAPI(letterbox.value)
+                askAPI(letterbox.value.toLowerCase())
             }
         }
         clearBox()

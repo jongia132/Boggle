@@ -67,6 +67,7 @@ async function askAPI(word) {
         }
     }
     else {
+        console.log(word)
         const offlineQuery = await window.api.findWord(word)
         if (offlineQuery == true) {
             console.log(offlineQuery)
