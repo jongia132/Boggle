@@ -15,7 +15,7 @@ async function askAPI(word) {
     var points = row.insertCell(2)
     valid.innerHTML = "<image src='./assets/loading.gif'></image>"
     points.innerHTML = "<image src='./assets/loading.gif'></image>"
-    if (navigator.onLine == true) {
+    if (window.api.findWord(word) == true) {
         const status = await checkWord(word)
         if (status == 200){
             Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top',title:"Correct", text:"That was a valid word!", icon:"success"})
@@ -67,20 +67,20 @@ async function askAPI(word) {
         }
     }
     else {
-        console.log(word)
-        const offlineQuery = await window.api.findWord(word)
+        var offlineQuery = await window.api.findWord(word)
+        console.log(offlineQuery)
         if (offlineQuery == true) {
-            console.log(offlineQuery)
+           console.log("YES")
         }
         else {
-            console.log(offlineQuery)
+           console.log('NO')
         }
     }
 }
 
 
-window.api.findword('wordcheck', (args) =>{
-    console.log(args)
+window.api.findword('wordcheck', (event, word) =>{
+    console.log(word)
 })
 
 async function timer() {

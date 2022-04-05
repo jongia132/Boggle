@@ -1,7 +1,7 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld("api", {
-    findWord: (word) => ipcRenderer.invoke('findWord', word)
+    findWord: (word) => ipcRenderer.invoke("findWord", word)
 })
 
 console.log("Preload Loading")

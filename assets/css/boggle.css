@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  background: #25282c;
+  background: rgb(37, 40, 44);
   color: azure;
   font-family: "Roboto", sans-serif;
   text-align: center;
@@ -18,14 +18,14 @@ body {
   border-collapse: separate;
   table-layout: fixed;
   display: inline-block;
-  background: #3d4745;
-  background: linear-gradient(149deg, #3d4745 0%, #363636 48%, #191c1c 100%);
+  background: rgb(61, 71, 69);
+  background: linear-gradient(149deg, rgb(61, 71, 69) 0%, rgb(54, 54, 54) 48%, rgb(25, 28, 28) 100%);
   border-radius: 2em;
 }
 
 .box {
   background: #E5E4E2;
-  color: #3a3a3a;
+  color: rgb(58, 58, 58);
   min-width: 100px;
   text-align: center;
   border-radius: 50%;
@@ -39,8 +39,8 @@ body {
   box-sizing: border-box;
   border: 0 solid;
   vertical-align: middle;
-  box-shadow: inset 0 0 10px #2b2b2b;
-  filter: drop-shadow(0 1px 10px #1d1d1d);
+  box-shadow: inset 0 0 10px rgb(43, 43, 43);
+  filter: drop-shadow(0 1px 10px rgb(29, 29, 29));
 }
 .box:hover {
   background: rgba(88, 88, 88, 0.568);
@@ -52,7 +52,7 @@ body {
 .selected {
   transition-duration: 0.1s;
   transition: ease-in-out;
-  background: #007209;
+  background: rgb(0, 114, 9);
   color: white;
   border: solid white;
   border-width: 4px;
@@ -60,7 +60,7 @@ body {
 }
 
 .start {
-  background: #bbffbb;
+  background: rgb(187, 255, 187);
   color: black;
   font-weight: bold;
 }

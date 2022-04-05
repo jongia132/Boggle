@@ -196,4 +196,3 @@ function resetGame() {
 
 /// Startup
 randomise()
-checkInternet()
