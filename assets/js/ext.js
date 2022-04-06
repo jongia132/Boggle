@@ -1,5 +1,3 @@
-var startTime = setInterval(timer, 1000);
-
 async function checkWord(word) {
     const a = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + word).then (response => {return response.status})
     return a
@@ -51,7 +49,11 @@ async function askAPI(word) {
         pointBox.innerText = totalPoints
     }
     else {
-        console.log(undefined)
+        Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top',title:"Wrong",text:"Your word failed to pass the dictionary test!", icon:"error"})
+        error_sound()
+        valid.innerHTML = "&#10060"
+        points.innerHTML = "0"
+        return false
     }
 }
 

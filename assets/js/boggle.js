@@ -25,6 +25,7 @@ var orderCount = 0
 var totalPoints = 0
 var pointBox = document.getElementById("currentScore")
 var cache = []
+var lastHovered = null
 
 // Sounds
 function click_sound() {
@@ -68,7 +69,6 @@ function randomise() {
             currentIndex--;
             [random[currentIndex], random[randomIndex]] = [random[randomIndex], random[currentIndex]];
         }
-        console.table(random)
     }
     // Inject into squares
     var randomIndex = 0
@@ -79,7 +79,6 @@ function randomise() {
         }
     }
 }
-// Timer
 
 // During Game
 
@@ -110,7 +109,6 @@ $(".box").mousedown(function(e) {
 $("#grid").mouseup(function(e) {
     if (e.which == 1) {
         mouseDown = false
-        $(".box").removeAttr("data-order");
         if (orderCount < 2) {
             letterbox.value = null
             $(".box").removeClass("selected")
@@ -130,6 +128,10 @@ $("#grid").mouseup(function(e) {
             }
         }
         clearBox()
+        var lines = document.querySelectorAll(".leader-line")
+        lines.forEach(line => {
+            line.remove()
+        })
         orderCount = 0
     }
 })
@@ -139,6 +141,12 @@ $("html").mouseup(function(e) {
     if (e.which == 1) {
         mouseDown = false
         clearBox()
+        $(".box").removeAttr("data-order")
+        var lines = document.querySelectorAll(".leader-line")
+        lines.forEach(line => {
+            line.remove()
+        })
+        orderCount = 0
     }
 })
 
@@ -153,15 +161,19 @@ $(".box").hover (function() {
             // ARROW DRAW
             var line = new LeaderLine(LeaderLine.pointAnchor(document.querySelector('[data-order=' + CSS.escape(orderCount-1) +']')), LeaderLine.pointAnchor(document.querySelector('[data-order='+ CSS.escape(orderCount) +']' )))
             line.path = 'straight'
-            line.pointAnchor
+            line.endPlug = 'arrow2'
+            lastHovered = $(this)
             click_sound()
         }
         else if ($(this).attr("data-order") == orderCount - 1) {
             $("[data-order='"+ orderCount +"']").removeClass("selected")
             currentSelection.slice(0, -1)
             orderCount--
+            document.getElementsByClassName("leader-line")[orderCount].remove()
+            lastHovered.removeAttr("data-order");
             letterbox.value = letterbox.value.slice(0, -1)
             click_sound()
+            lastHovered = $(this)
         }
     }
 })
@@ -175,7 +187,17 @@ function clearBox() {
 }
 
 function stopGame() {
-    console.log("stopping")
+    Swal.fire({title: "Time Expired", icon:'info', html: 'Points: '+totalPoints})
+    $('.box').off()
+}
+
+function startModal() {
+    Swal.fire({title: "Boogle (Boggle)", text:"Welcome to boggle!", icon:'info', allowOutsideClick: false, confirmButtonText: 'Start Game'}).then ((result) => {
+        if (result.isConfirmed) {
+            randomise()
+            startTime = setInterval(timer, 1000);
+        }
+    })
 }
 
 function resetGame() {
@@ -184,4 +206,4 @@ function resetGame() {
 }
 
 // Startup
-randomise()
+startModal()

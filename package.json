@@ -1,9 +1,10 @@
 {
   "devDependencies": {
-    "electron": "^17.2.0"
+    "electron": "^17.2.0",
+    "electron-packager": "^15.4.0"
   },
-  "name": "sdd-task-1",
-  "description": "SDD Assessment Task 1",
+  "name": "boogle",
+  "description": "Boggle (Boogle)",
   "version": "0.0.1",
   "main": "index.js",
   "dependencies": {
@@ -101,5 +102,5 @@
   "bugs": {
     "url": "https://github.com/jongia132/SDD-Task-1/issues"
   },
-  "homepage": "https://github.com/jongia132/SDD-Task-1#readme"
+  "homepage": "https://jonathang.me"
 }
