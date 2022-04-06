@@ -10,34 +10,26 @@ const createWindow = () => {
         },
     })
     window.loadFile("boggle.html")
+    window.webContents.openDevTools()
     ipcMain.handle("findWord", async (event, word) => {
-        fs.readFile("./assets/word-list.txt", function (err, data) {
-            if (err)
-                throw err;
-            if (data.includes(word)) {
-                return true;
+        fs.readFile("./assets/word-list.txt", (err, data) => {
+            var search = new RegExp('\n'+word+'\n')
+            if (err) {
+                throw err
+            }
+            else if (search.test(data) == true) {
+                return true
             }
             else {
-                return false;
+                return false
             }
         })
+        return
     })
 }
 
-async function offlineWord (word) {
-    fs.readFile("./assets/word-list.txt", function (err, data) {
-        if (err)
-            throw err;
-        if (data.includes(word)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    })
-}
-//Menubar
-//Menu.setApplicationMenu()
+// Menubar
+// Menu.setApplicationMenu()
 
 app.whenReady().then(() => {
     createWindow()

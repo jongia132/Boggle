@@ -1,4 +1,4 @@
-/// Variables
+// Variables
 const letters = [
     ['A','A','E','E','G','N'],
     ['A','B','B','J','O','O'],
@@ -26,7 +26,7 @@ var totalPoints = 0
 var pointBox = document.getElementById("currentScore")
 var cache = []
 
-//Sounds
+// Sounds
 function click_sound() {
     const sound = new Audio("./assets/sounds/mixkit-plastic-bubble-click-1124.wav")
     const newsound = sound.cloneNode()
@@ -53,13 +53,13 @@ class index {
     }
 }
 
-/// Randomise Letters, inject into squares
+// Randomise Letters, inject into squares
 function randomise() {
     random = []
     for (let n = 0; n < 16; n++) {
         random.push(letters[n][Math.floor(Math.random() * 5 + 1)])
     }
-    //Shuffle the shuffled array lmaoo
+    // Shuffle the shuffled array lmaoo
     shuffle()
     function shuffle() {
         let currentIndex = random.length, randomIndex
@@ -79,16 +79,16 @@ function randomise() {
         }
     }
 }
-/// Timer
+// Timer
 
-/// During Game
+// During Game
 
-///Letter Hold
-    // boxLocker Function
-    //function lockBox(x, y){
-    //    var selected = document.getElementById("tr"+ (column+1)).getElementsByClassName("box")[row + 1]
-    //    console.log(selected)
-    //}
+// Letter Hold
+//     boxLocker Function
+//     function lockBox(x, y){
+//        var selected = document.getElementById("tr"+ (column+1)).getElementsByClassName("box")[row + 1]
+//        console.log(selected)
+//     }
 
 // On hold enable hover tracker
 $(".box").mousedown(function(e) {
@@ -100,7 +100,6 @@ $(".box").mousedown(function(e) {
         $(this).attr("data-order", "0")
         currentSelection = []
         mouseDown = true
-        //console.log("Mousedown")
         currentSelection.push($(this).text())
         letterbox.value = $(this).text()
         $(this).addClass("selected")
@@ -111,7 +110,6 @@ $(".box").mousedown(function(e) {
 $("#grid").mouseup(function(e) {
     if (e.which == 1) {
         mouseDown = false
-        //console.log("Mouseup")
         $(".box").removeAttr("data-order");
         if (orderCount < 2) {
             letterbox.value = null
@@ -126,7 +124,6 @@ $("#grid").mouseup(function(e) {
         else {
             var WordCount = letterbox.value.length
             if (WordCount < 16, WordCount > 2) {
-                //console.log("Requirements met!")
                 // Add word to queue
                 cache.push(letterbox.value)
                 askAPI(letterbox.value.toLowerCase())
@@ -137,7 +134,7 @@ $("#grid").mouseup(function(e) {
     }
 })
 
-//Cancel submit event by hovering out of grid
+// Cancel submit event by hovering out of grid
 $("html").mouseup(function(e) {
     if (e.which == 1) {
         mouseDown = false
@@ -149,29 +146,27 @@ $(".box").hover (function() {
     if (mouseDown == true) {
         if ($(this).hasClass("selected") == false) {
             currentSelection.push($(this).text())
-            //console.log($(this).text())
             $(this).addClass("selected")
             $(this).attr("data-order", orderCount+1)
             orderCount++
-            //var row = $(this).closest("tr").index()
-            //var column = $(this).index()
-            //console.log(row, column)
             document.getElementById("letterbox").value = letterbox.value + $(this).text()
-            //console.log(currentSelection)
+            // ARROW DRAW
+            var line = new LeaderLine(LeaderLine.pointAnchor(document.querySelector('[data-order=' + CSS.escape(orderCount-1) +']')), LeaderLine.pointAnchor(document.querySelector('[data-order='+ CSS.escape(orderCount) +']' )))
+            line.path = 'straight'
+            line.pointAnchor
             click_sound()
         }
         else if ($(this).attr("data-order") == orderCount - 1) {
             $("[data-order='"+ orderCount +"']").removeClass("selected")
             currentSelection.slice(0, -1)
             orderCount--
-            //console.log(orderCount)
             letterbox.value = letterbox.value.slice(0, -1)
             click_sound()
         }
     }
 })
 
-//Clear Box
+// Clear Box
 function clearBox() {
     letterbox.value = null
     $(".box").removeClass("selected")
@@ -184,15 +179,9 @@ function stopGame() {
 }
 
 function resetGame() {
-    //randomise()
-    //clearBox()
     cache = []
-    /// DEBUGGING
-    ///
-    ///
-    /// ONLY
     location.reload()
 }
 
-/// Startup
+// Startup
 randomise()

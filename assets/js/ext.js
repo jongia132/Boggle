@@ -5,9 +5,8 @@ async function checkWord(word) {
     return a
 }
 
-//Dictionary API Hooker
+// Dictionary API Hooker
 async function askAPI(word) {
-    //console.log(word)
     var table = document.getElementById("queue")
     var row = table.insertRow(1)
     row.insertCell(0).innerHTML = word
@@ -15,73 +14,46 @@ async function askAPI(word) {
     var points = row.insertCell(2)
     valid.innerHTML = "<image src='./assets/loading.gif'></image>"
     points.innerHTML = "<image src='./assets/loading.gif'></image>"
-    if (window.api.findWord(word) == true) {
-        const status = await checkWord(word)
-        if (status == 200){
-            Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top',title:"Correct", text:"That was a valid word!", icon:"success"})
-            success_sound.play()
-            valid.innerHTML = "&#9989"
-            var length = word.length
-            switch (length){
-                case 3: 
-                case 4:
-                    //1 point
-                    totalPoints++
-                    points.innerHTML = "1"
-                    break;
-                case 5:
-                    totalPoints+=2
-                    //2 points
-                    points.innerHTML = "2"
-                    break;
-                case 6:
-                    totalPoints+=3
-                    //3 points
-                    points.innerHTML = "3"
-                    break;
-                case 7:
-                    totalPoints+=4
-                    points.innerHTML = "4"
-                    //4 points
-                    break;
-                default:
-                    totalPoints+=11
-                    points.innerHTML = "11"
-                    // 11 points
-                    break;
-            }
-            pointBox.innerText = totalPoints
+    if (await window.api.findWord(word) == true) {
+        console.log("YES")
+        Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top',title:"Correct", text:"That was a valid word!", icon:"success"})
+        success_sound.play()
+        valid.innerHTML = "&#9989"
+        var length = word.length
+        switch (length){
+            case 3: 
+            case 4:
+                // 1 point
+                totalPoints++
+                points.innerHTML = "1"
+                break;
+            case 5:
+                totalPoints+=2
+                // 2 points
+                points.innerHTML = "2"
+                break;
+            case 6:
+                totalPoints+=3
+                // 3 points
+                points.innerHTML = "3"
+                break;
+            case 7:
+                totalPoints+=4
+                points.innerHTML = "4"
+                // 4 points
+                break;
+            default:
+                totalPoints+=11
+                points.innerHTML = "11"
+                // 11 points
+                break;
         }
-        else if (status == 404) {
-            Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top',title:"Wrong",text:"Your word failed to pass the dictionary test!", icon:"error"})
-            error_sound()
-            valid.innerHTML = "&#10060"
-            points.innerHTML = "0"
-            return false
-        }
-        else if (status == 503) {
-            Swal.fire({title:"Error", text:"The dictionary API is currently experiencing issues. You will be moved into offline mode temporarily during this session.", icon:"warning"})
-        }
-        else {
-            alert("An unknown error has occured!")
-        }
+        pointBox.innerText = totalPoints
     }
     else {
-        var offlineQuery = await window.api.findWord(word)
-        console.log(offlineQuery)
-        if (offlineQuery == true) {
-           console.log("YES")
-        }
-        else {
-           console.log('NO')
-        }
+        console.log(undefined)
     }
 }
-
-
-window.api.findword('wordcheck', (event, word) =>{
-    console.log(word)
-})
 
 async function timer() {
     var t = document.getElementById("timer").innerText
@@ -106,3 +78,15 @@ const checkInternet = () => {
 }
 window.addEventListener('online', checkInternet)
 window.addEventListener('offline', checkInternet)
+
+
+    // else if (status == 404) {
+    //     Swal.fire({timerProgressBar: true,showConfirmButton: false,timer:1500,toast:true,position:'top',title:"Wrong",text:"Your word failed to pass the dictionary test!", icon:"error"})
+    //     error_sound()
+    //     valid.innerHTML = "&#10060"
+    //     points.innerHTML = "0"
+    //     return false
+    // }
+    // else if (status == 503) {
+    //     Swal.fire({title:"Error", text:"The dictionary API is currently experiencing issues. You will be moved into offline mode temporarily during this session.", icon:"warning"})
+    // }
