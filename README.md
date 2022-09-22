@@ -1,1 +1,2 @@
-# SDD-Task-1
+# Boggle
+SDD Task 1
