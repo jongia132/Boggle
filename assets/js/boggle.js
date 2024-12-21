@@ -199,7 +199,7 @@ function stopGame() {
 }
 
 function startModal() {
-    Swal.fire({ title: "Boogle (Boggle)", text: "Welcome to boggle!", icon: 'info', allowOutsideClick: false, confirmButtonText: 'Start Game' }).then((result) => {
+    Swal.fire({ title: "Boogle", text: "Welcome to Boogle!", icon: 'info', allowOutsideClick: false, confirmButtonText: 'Start Game' }).then((result) => {
         if (result.isConfirmed) {
             randomise();
             startTime = setInterval(timer, 1000);

@@ -1,20 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
-        <link href="./assets/css/boggle.css" rel="stylesheet">
-        <title>About - Boggle</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noindex, nofollow">
-    </head>
-    <body data-bs-theme="dark">
-        <nav class="navbar sticky-top bg-body">
-            <div class="container">
-                <span class="navbar-brand" href="#">Boogle</span>
+<html lang="en-AU">
+
+<head>
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/css/boggle.css" rel="stylesheet">
+    <title>About - Boggle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+
+<body data-bs-theme="dark">
+    <nav class="navbar navbar-expand-sm sticky-top bg-body">
+        <div class="container">
+            <span class="navbar-brand">Boogle</span>
+            <div class="navbar-collapse flex-row" id="navbarScroll">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="index.html">Game</a>
+                    <a class="nav-link active" aria-current="page" href="about.html">About</a>
+                </div>
             </div>
-        </nav>
-        <main class="container">
-            <h1>What is Boogle?</h1>
-        </main>
-    </body>
+        </div>
+    </nav>
+    <main class="container">
+        <div class="alert alert-warning" role="alert">
+            This project is no longer actively developed!
+        </div>
+        <div class="alert alert-info" role="alert">
+            This is a port of the original version for desktop, optimised for the web.
+        </div>
+        <h2>What is Boogle?</h2>
+        <p>Boogle is a word game based off of boggle, where you match letters adjacent to each other including diagonals
+            to form a word. However, as I was short on time orignally when making this game, you can cheat and go
+            through the gaps to create words from anywhere, hence it being called Boogle not Boggle.</p>
+        <h2>Why can I not play on my phone?</h2>
+        <p>Being my first web project, I did not plan to support touch screens and thus this game does not support
+            mobile devices. You must use a device with pointer support. The site is also not optimised for mobile.</p>
+        <h2>Where can I find the source code?</h2>
+        <p>It can be found on my GitHub, which you can find on my main website.</p>
+        <h2>Tell me more about this project</h2>
+        <p>This site was originally a school project that I had to create. It was based in Electron for a singular
+            purpose: offline support. With this requirement no longer required, I was able to remove a bulk of the
+            excess dependencies and reduce the size dramatically. As a result it works only online now.</p>
+        <h4>What changed from the first revision?</h4>
+        <p>Much of the user interface has been adapted to work outside of the bloated application. Parts of jQuery have
+            been updated to no longer use deprecated functionality.</p>
+        <h2>Why are some words detected as wrong when they are real?</h2>
+        <p>Unfortunately I am querying a dictionary API and their word list is not very robust.</p>
+        <h2>The user interface looks like poo</h2>
+        <p>Thanks!</p>
+    </main>
+
+    <footer class="container">
+        <span>© 2022 JonathanG</span>
+    </footer>
+</body>
+
 </html>

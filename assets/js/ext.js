@@ -15,7 +15,7 @@ async function askAPI(word) {
     valid.innerHTML = "<div class='spinner-border spinner-border-sm' role='status'><span class='visually-hidden'>Loading...</span></div>";
     points.innerHTML = "<div class='spinner-border spinner-border-sm' role='status'><span class='visually-hidden'>Loading...</span></div>";
     if (await checkWord(word) == true) {
-        Swal.fire({ timerProgressBar: true, showConfirmButton: false, timer: 1500, toast: true, position: 'top', title: "Correct", text: "That was a valid word!", icon: "success" })
+        Swal.fire({ timerProgressBar: true, showConfirmButton: false, timer: 1500, toast: true, position: 'top', title: "Correct", icon: "success" })
         success_sound.play();
         valid.innerHTML = "&#9989";
         switch (word.length) {
@@ -49,7 +49,7 @@ async function askAPI(word) {
         pointBox.innerText = totalPoints;
     }
     else {
-        Swal.fire({ timerProgressBar: true, showConfirmButton: false, timer: 1500, toast: true, position: 'top', title: "Wrong", text: "Your word failed to pass the dictionary test!", icon: "error" });
+        Swal.fire({ timerProgressBar: true, showConfirmButton: false, timer: 1500, toast: true, position: 'top', title: "Invalid word", icon: "error" });
         error_sound();
         valid.innerHTML = "&#10060";
         points.innerHTML = "0";

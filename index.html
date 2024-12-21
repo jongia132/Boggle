@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 
 <head>
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
@@ -13,20 +13,27 @@
 </head>
 
 <body data-bs-theme="dark">
-    <nav class="navbar sticky-top bg-body">
+    <nav class="navbar navbar-expand-sm sticky-top bg-body">
         <div class="container">
-            <span class="navbar-brand" href="#">Boogle</span>
+            <span class="navbar-brand">Boogle</span>
+            <div class="navbar-collapse flex-row" id="navbarScroll">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="index.html">Game</a>
+                    <a class="nav-link" href="about.html">About</a>
+                </div>
+            </div>
             <button onclick="resetGame()" class="btn btn-danger">Reset</button>
         </div>
     </nav>
-    <main class="container">
+    <main class="container-lg">
+        <div class="d-flex justify-content-between my-3 align-items-center">
+            <input id="letterbox" tabindex="-1">
+            <div class="d-flex gap-5 score">
+                <span class="d-flex">Current Score:&nbsp<span id="currentScore"> 0</span></span>
+                <span class="d-flex">Time Left:&nbsp<span id="timer">60</span></span>
+            </div>
+        </div>
         <!-- Letter Grid -->
-        <span>Current Score
-            <pre id="currentScore">0</pre>
-        </span><span>Time Left
-            <pre id="timer">60</pre>
-        </span>
-        <input id="letterbox" tabindex="-1">
         <div class="row">
             <table id="grid" class="col-auto order-2 px-0">
                 <tr id="tr0">
@@ -66,6 +73,11 @@
             </output>
         </div>
     </main>
+
+    <footer class="container">
+        <span>© 2022 JonathanG</span>
+    </footer>
+    
     <script src="./assets/js/ext.js" type="text/javascript"></script>
     <script src="./assets/js/boggle.js" type="text/javascript"></script>
 </body>

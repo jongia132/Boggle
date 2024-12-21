@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap");
 
+body {
+  min-width: fit-content;
+}
+
 #grid {
   border-spacing: 1.5em;
   border-collapse: separate;
@@ -69,4 +73,8 @@ table.leader-line {
 
 #queue {
   text-align: center;
+}
+
+.score {
+  font-size: 1.4rem;
 }
