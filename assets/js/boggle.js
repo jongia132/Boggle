@@ -1,69 +1,75 @@
 // Variables
 const letters = [
-    ['A','A','E','E','G','N'],
-    ['A','B','B','J','O','O'],
-    ['A','C','H','O','P','S'],
-    ['A','F','F','K','P','S'],
-    ['A','O','O','T','T','W'],
-    ['C','I','M','O','T','U'],
-    ['D','E','I','L','R','X'],
-    ['D','E','L','R','V','Y'],
-    ['D','I','S','T','T','Y'],
-    ['E','E','G','H','N','W'],
-    ['E','E','I','N','S','U'],
-    ['E','H','R','T','V','W'],
-    ['E','I','O','S','S','T'],
-    ['E','L','R','T','T','Y'],
-    ['H','I','M','N','U','Q'],
-    ['H','L','N','N','R','Z']
-]
-var random = []
-var currentSelection = []
-const letterbox = document.getElementById("letterbox")
-var mouseDown = false
-var orderCount = 0
-var totalPoints = 0
-var pointBox = document.getElementById("currentScore")
-var cache = []
-var lastHovered = null
+    ['A', 'A', 'E', 'E', 'G', 'N'],
+    ['A', 'B', 'B', 'J', 'O', 'O'],
+    ['A', 'C', 'H', 'O', 'P', 'S'],
+    ['A', 'F', 'F', 'K', 'P', 'S'],
+    ['A', 'O', 'O', 'T', 'T', 'W'],
+    ['C', 'I', 'M', 'O', 'T', 'U'],
+    ['D', 'E', 'I', 'L', 'R', 'X'],
+    ['D', 'E', 'L', 'R', 'V', 'Y'],
+    ['D', 'I', 'S', 'T', 'T', 'Y'],
+    ['E', 'E', 'G', 'H', 'N', 'W'],
+    ['E', 'E', 'I', 'N', 'S', 'U'],
+    ['E', 'H', 'R', 'T', 'V', 'W'],
+    ['E', 'I', 'O', 'S', 'S', 'T'],
+    ['E', 'L', 'R', 'T', 'T', 'Y'],
+    ['H', 'I', 'M', 'N', 'U', 'Q'],
+    ['H', 'L', 'N', 'N', 'R', 'Z']
+];
+
+let random = [];
+let currentSelection = [];
+const letterbox = document.getElementById("letterbox");
+let mouseDown = false;
+let orderCount = 0;
+let totalPoints = 0;
+let pointBox = document.getElementById("currentScore");
+let cache = [];
+let lastHovered = null;
 
 // Sounds
+const success_sound = new Audio("./assets/sounds/mixkit-select-click-1109.wav");
+
 function click_sound() {
-    const sound = new Audio("./assets/sounds/mixkit-plastic-bubble-click-1124.wav")
-    const newsound = sound.cloneNode()
-    newsound.play()
+    const sound = new Audio("./assets/sounds/mixkit-plastic-bubble-click-1124.wav");
+    const newsound = sound.cloneNode();
+    newsound.play();
 }
-const success_sound = new Audio("./assets/sounds/mixkit-select-click-1109.wav")
+
 function error_sound() {
-    const audio = new Audio("./assets/sounds/mixkit-negative-tone-interface-tap-2569.wav")
-    const newaudio = audio.cloneNode()
-    newaudio.play()
+    const audio = new Audio("./assets/sounds/mixkit-negative-tone-interface-tap-2569.wav");
+    const newaudio = audio.cloneNode();
+    newaudio.play();
 }
 
 class index {
-    constructor (x,y) {
-        this.x = x
-        this.y = y
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
     }
+
     static lockBox() {
-        console.log(document.getElementById("tr"+this.y).getElementsByClassName("box")[this.x].textContent())
+        console.log(document.getElementById("tr" + this.y).getElementsByClassName("box")[this.x].textContent());
     }
 
     static clear() {
-        return random = []
+        return random = [];
     }
 }
 
 // Randomise Letters, inject into squares
 function randomise() {
-    random = []
+    random = [];
+
     for (let n = 0; n < 16; n++) {
-        random.push(letters[n][Math.floor(Math.random() * 5 + 1)])
+        random.push(letters[n][Math.floor(Math.random() * 5 + 1)]);
     }
+
     // Shuffle the shuffled array lmaoo
-    shuffle()
+    shuffle();
     function shuffle() {
-        let currentIndex = random.length, randomIndex
+        let currentIndex = random.length, randomIndex;
         while (currentIndex != 0) {
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex--;
@@ -71,11 +77,12 @@ function randomise() {
         }
     }
     // Inject into squares
-    var randomIndex = 0
-    for (let c = 0; c < 4; c++ ) {
-        for (let d = 0; d < 4; d++ ) {
-            document.getElementById("tr"+c).getElementsByClassName("box")[d].innerHTML = random[randomIndex]
-            randomIndex = randomIndex+1
+    let randomIndex = 0;
+
+    for (let c = 0; c < 4; c++) {
+        for (let d = 0; d < 4; d++) {
+            document.getElementById("tr" + c).getElementsByClassName("box")[d].innerHTML = random[randomIndex];
+            randomIndex = randomIndex + 1;
         }
     }
 }
@@ -83,127 +90,127 @@ function randomise() {
 // During Game
 
 // Letter Hold
-//     boxLocker Function
-//     function lockBox(x, y){
-//        var selected = document.getElementById("tr"+ (column+1)).getElementsByClassName("box")[row + 1]
-//        console.log(selected)
-//     }
+// boxLocker Function
+function lockBox(x, y) {
+    const selected = document.getElementById("tr" + (column + 1)).getElementsByClassName("box")[row + 1]
+    console.log(selected)
+}
 
 // On hold enable hover tracker
-$(".box").mousedown(function(e) {
-    event.preventDefault()
-    if (e.which == 1) {
-        $(".box").removeClass("selected")
-        $(".box").removeClass("start")
-        $(this).addClass("start")
-        $(this).attr("data-order", "0")
-        currentSelection = []
-        mouseDown = true
-        currentSelection.push($(this).text())
-        letterbox.value = $(this).text()
-        $(this).addClass("selected")
-        click_sound()
-    }
-})
+$(".box").on('mousedown', function (e) {
+    e.preventDefault();
 
-$("#grid").mouseup(function(e) {
     if (e.which == 1) {
-        mouseDown = false
+        $(".box").removeClass("selected");
+        $(".box").removeClass("start");
+        $(this).addClass("start");
+        $(this).attr("data-order", "0");
+        currentSelection = [];
+        mouseDown = true;
+        currentSelection.push($(this).text());
+        letterbox.value = $(this).text();
+        $(this).addClass("selected");
+        click_sound();
+    }
+});
+
+$("#grid").on('mouseup', function (e) {
+    if (e.which == 1) {
+        mouseDown = false;
+
         if (orderCount < 2) {
-            letterbox.value = null
-            $(".box").removeClass("selected")
-            $(".box").removeClass("start")
-            currentSelection = []
-            error_sound()
-        }
-        else if (cache.includes(letterbox.value)) {
-            Swal.fire({timerProgressBar: true,showConfirmButton: false,toast: true,position: 'top',timer: 1500,title:"Duplicate", icon:"error"})
-        }
-        else {
-            var WordCount = letterbox.value.length
+            letterbox.value = null;
+            $(".box").removeClass("selected");
+            $(".box").removeClass("start");
+            currentSelection = [];
+            error_sound();
+        } else if (cache.includes(letterbox.value)) {
+            Swal.fire({ timerProgressBar: true, showConfirmButton: false, toast: true, position: 'top', timer: 1500, title: "Duplicate", icon: "error" });
+        } else {
+            const WordCount = letterbox.value.length;
             if (WordCount < 16, WordCount > 2) {
                 // Add word to queue
-                cache.push(letterbox.value)
-                askAPI(letterbox.value.toLowerCase())
+                cache.push(letterbox.value);
+                askAPI(letterbox.value.toLowerCase());
             }
         }
-        clearBox()
-        var lines = document.querySelectorAll(".leader-line")
+
+        clearBox();
+        const lines = document.querySelectorAll(".leader-line");
         lines.forEach(line => {
-            line.remove()
+            line.remove();
         })
-        orderCount = 0
+        orderCount = 0;
     }
-})
+});
 
 // Cancel submit event by hovering out of grid
-$("html").mouseup(function(e) {
+$("html").on('mouseup', function (e) {
     if (e.which == 1) {
-        mouseDown = false
-        clearBox()
-        $(".box").removeAttr("data-order")
-        var lines = document.querySelectorAll(".leader-line")
+        mouseDown = false;
+        clearBox();
+        $(".box").removeAttr("data-order");
+        const lines = document.querySelectorAll(".leader-line");
         lines.forEach(line => {
-            line.remove()
+            line.remove();
         })
-        orderCount = 0
+        orderCount = 0;
     }
-})
+});
 
-$(".box").hover (function() {
+$(".box").on('mouseenter', function () {
     if (mouseDown == true) {
         if ($(this).hasClass("selected") == false) {
-            currentSelection.push($(this).text())
-            $(this).addClass("selected")
-            $(this).attr("data-order", orderCount+1)
-            orderCount++
-            document.getElementById("letterbox").value = letterbox.value + $(this).text()
+            currentSelection.push($(this).text());
+            $(this).addClass("selected");
+            $(this).attr("data-order", orderCount + 1);
+            orderCount++;
+            document.getElementById("letterbox").value = letterbox.value + $(this).text();
             // ARROW DRAW
-            var line = new LeaderLine(LeaderLine.pointAnchor(document.querySelector('[data-order=' + CSS.escape(orderCount-1) +']')), LeaderLine.pointAnchor(document.querySelector('[data-order='+ CSS.escape(orderCount) +']' )))
-            line.path = 'straight'
-            line.endPlug = 'arrow2'
-            lastHovered = $(this)
-            click_sound()
-        }
-        else if ($(this).attr("data-order") == orderCount - 1) {
-            $("[data-order='"+ orderCount +"']").removeClass("selected")
-            currentSelection.slice(0, -1)
-            orderCount--
-            document.getElementsByClassName("leader-line")[orderCount].remove()
+            const line = new LeaderLine(LeaderLine.pointAnchor(document.querySelector('[data-order=' + CSS.escape(orderCount - 1) + ']')), LeaderLine.pointAnchor(document.querySelector('[data-order=' + CSS.escape(orderCount) + ']')));
+            line.path = 'straight';
+            line.endPlug = 'arrow2';
+            lastHovered = $(this);
+            click_sound();
+        } else if ($(this).attr("data-order") == orderCount - 1) {
+            $("[data-order='" + orderCount + "']").removeClass("selected");
+            currentSelection.slice(0, -1);
+            orderCount--;
+            document.getElementsByClassName("leader-line")[orderCount].remove();
             lastHovered.removeAttr("data-order");
-            letterbox.value = letterbox.value.slice(0, -1)
-            click_sound()
-            lastHovered = $(this)
+            letterbox.value = letterbox.value.slice(0, -1);
+            click_sound();
+            lastHovered = $(this);
         }
     }
-})
+});
 
 // Clear Box
 function clearBox() {
-    letterbox.value = null
-    $(".box").removeClass("selected")
-    $(".box").removeClass("start")
-    currentSelection = []
+    letterbox.value = null;
+    $(".box").removeClass("selected");
+    $(".box").removeClass("start");
+    currentSelection = [];
 }
 
 function stopGame() {
-    Swal.fire({title: "Time Expired", icon:'info', html: 'Points: '+totalPoints})
-    $('.box').off()
+    Swal.fire({ title: "Time Expired", icon: 'info', html: 'Points: ' + totalPoints });
+    $('.box').off();
 }
 
 function startModal() {
-    Swal.fire({title: "Boogle (Boggle)", text:"Welcome to boggle!", icon:'info', allowOutsideClick: false, confirmButtonText: 'Start Game'}).then ((result) => {
+    Swal.fire({ title: "Boogle (Boggle)", text: "Welcome to boggle!", icon: 'info', allowOutsideClick: false, confirmButtonText: 'Start Game' }).then((result) => {
         if (result.isConfirmed) {
-            randomise()
+            randomise();
             startTime = setInterval(timer, 1000);
         }
-    })
-}
+    });
+};
 
 function resetGame() {
-    cache = []
-    location.reload()
+    cache = [];
+    location.reload();
 }
 
 // Startup
-startModal()
+startModal();
